@@ -11,15 +11,11 @@ Please add your YouTube Android Player API Key in the res/values/strings.xml fil
 ```
 
 # Used Libraries
-[RxKotlin](https://github.com/ReactiveX/RxKotlin)
-
-[RxAndroid](https://github.com/ReactiveX/RxAndroid)
-
-[Retrofit](https://github.com/square/retrofit)
-
-[Picasso](https://github.com/square/picasso)
-
-[YouTube Android Player API](https://developers.google.com/youtube/android/player/)
+- [RxKotlin](https://github.com/ReactiveX/RxKotlin)
+- [RxAndroid](https://github.com/ReactiveX/RxAndroid)
+- [Retrofit](https://github.com/square/retrofit)
+- [Picasso](https://github.com/square/picasso)
+- [YouTube Android Player API](https://developers.google.com/youtube/android/player/)
 
 # Preview
 <img src="https://yassinemoslah.com/api/main_screen.jpg" width="300" height="600">      <img src="https://yassinemoslah.com/api/details.jpg" width="300" height="600">
