@@ -15,15 +15,13 @@ import kotlinx.android.synthetic.main.activity_details.*
 
 class DetailsActivity : YouTubeBaseActivity(), DetailsPresenter.View, YouTubePlayer.OnInitializedListener {
 
-    private val detailsPresenter = DetailsPresenterImplementation()
     var movie: Movie? = null
     private val RECOVERY_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-
-        detailsPresenter.setView(this)
+        val detailsPresenter = DetailsPresenterImplementation(this)
     }
 
     override fun showMovieDetails() {
@@ -38,7 +36,6 @@ class DetailsActivity : YouTubeBaseActivity(), DetailsPresenter.View, YouTubePla
                 movementMethod = ScrollingMovementMethod()
             }
         }
-
     }
 
     override fun onInitializationSuccess(p0: YouTubePlayer.Provider?, p1: YouTubePlayer?, p2: Boolean) {

@@ -1,9 +1,8 @@
 package com.yassine.movieguide.presentation.presenters.interfaces
 
 import com.yassine.movieguide.core.models.Category
-import com.yassine.movieguide.presentation.presenters.BasePresenter
 
-interface MainPresenter : BasePresenter {
+interface MainPresenter {
 
     interface View {
         fun showCategories(categories: ArrayList<Category>)
@@ -12,5 +11,7 @@ interface MainPresenter : BasePresenter {
         fun showError()
     }
 
-    fun setView(view: MainPresenter.View)
+    fun onCategoriesFetchSuccess(categories: ArrayList<Category>)
+    fun updateCategory(category: Category)
+    fun onMoviesFetchFailed(e: Throwable)
 }
