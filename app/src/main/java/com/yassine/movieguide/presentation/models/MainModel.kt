@@ -14,6 +14,9 @@ class MainModel : ViewModel() {
     private var getAllMoviesInteractor: GetAllMoviesInteractor
     private var compositeDisposable: CompositeDisposable
     private var mainPresenter: MainPresenter? = null
+    private var categories = ArrayList<Category>()
+    private var throwable: Throwable? = null
+    private var firstCall = true
 
     init {
         getAllMoviesInteractor = GetAllMoviesInteractorImplementation()
@@ -24,22 +27,36 @@ class MainModel : ViewModel() {
         this.mainPresenter = mainPresenter
     }
 
-
     fun getAllMovies() {
-        getMovies()
-                .subscribe(
-                        {
-                            mainPresenter?.updateCategory(it)
-                        },
-                        {
-                            mainPresenter?.onMoviesFetchFailed(it)
-                        },
-                        {
-                        },
-                        {
-                            compositeDisposable.add(it)
-                        }
-                )
+        if (firstCall) {
+            getMovies()
+                    .subscribe(
+                            {
+                                mainPresenter?.updateCategory(it)
+                                categories.add(it)
+                            },
+                            {
+                                throwable = it
+                                mainPresenter?.onMoviesFetchFailed(it)
+                            },
+                            {
+                                firstCall = false
+                            },
+                            {
+                                compositeDisposable.add(it)
+                            }
+                    )
+
+        } else {
+            if (throwable == null) {
+                mainPresenter?.onCategoriesFetchSuccess(categories)
+                Observable.fromIterable(categories).subscribe { mainPresenter?.updateCategory(it) }
+            } else {
+                mainPresenter?.onMoviesFetchFailed(throwable!!)
+            }
+
+        }
+
     }
 
     private fun getMovies(): Observable<Category> {

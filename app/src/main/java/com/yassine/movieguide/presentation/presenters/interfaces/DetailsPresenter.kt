@@ -1,6 +1,8 @@
 package com.yassine.movieguide.presentation.presenters.interfaces
 
-interface DetailsPresenter {
+import com.yassine.movieguide.presentation.presenters.BasePresenter
+
+interface DetailsPresenter : BasePresenter {
 
     interface View {
         fun showMovieDetails()

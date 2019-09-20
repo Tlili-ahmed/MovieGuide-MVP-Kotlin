@@ -17,11 +17,11 @@ class DetailsActivity : YouTubeBaseActivity(), DetailsPresenter.View, YouTubePla
 
     var movie: Movie? = null
     private val RECOVERY_REQUEST = 1
-
+    private var detailsPresenter : DetailsPresenter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
-        val detailsPresenter = DetailsPresenterImplementation(this)
+        detailsPresenter = DetailsPresenterImplementation(this)
     }
 
     override fun showMovieDetails() {
@@ -57,5 +57,10 @@ class DetailsActivity : YouTubeBaseActivity(), DetailsPresenter.View, YouTubePla
             // Retry initialization if user performed a recovery action
             trailerVideo.initialize(getString(R.string.YouTube_Api_Key), this)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        detailsPresenter?.destroy()
     }
 }

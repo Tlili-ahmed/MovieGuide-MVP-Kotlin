@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     private lateinit var categoriesAdapter: CategoriesAdapter
-
+    private var mainPresenter: MainPresenter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
         rvCategories.adapter = categoriesAdapter
 
         val mainModel = ViewModelProviders.of(this).get(MainModel::class.java)
-        val mainPresenter = MainPresenterImplementation(this, mainModel)
-        mainModel.initialize(mainPresenter)
-        mainPresenter.initialize()
+        mainPresenter = MainPresenterImplementation(this, mainModel)
+        mainModel.initialize(mainPresenter!!)
+        mainPresenter!!.initialize()
 
     }
 
@@ -49,5 +49,10 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     override fun showError() {
         Toast.makeText(this, "Please verify your internet connexion", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainPresenter?.destroy()
     }
 }
