@@ -9,18 +9,18 @@ import io.reactivex.Observable
 
 class GetAllMoviesInteractorImplementation() : GetAllMoviesInteractor {
 
-    private var movieRepository : MovieRepository? = null
+    private var movieRepository : MovieRepository
 
     init {
         movieRepository = MovieRepositoryImplementation()
     }
 
     override fun getAllCategories(): Observable<ArrayList<Category>> {
-        return movieRepository!!.getAllCategories()
+        return movieRepository.getAllCategories()
     }
 
     override fun getMoviesByCategorie(category: Category): Observable<ArrayList<Movie>> {
-        return movieRepository!!.getMoviesByCategorie(category)
+        return movieRepository.getMoviesByCategorie(category)
     }
 
 }

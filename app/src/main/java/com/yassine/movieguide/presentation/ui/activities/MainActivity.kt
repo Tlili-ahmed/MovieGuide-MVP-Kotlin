@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     private lateinit var categoriesAdapter: CategoriesAdapter
-    private var mainPresenter: MainPresenter? = null
+    private lateinit var mainPresenter: MainPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
         val mainModel = ViewModelProviders.of(this).get(MainModel::class.java)
         mainPresenter = MainPresenterImplementation(this, mainModel)
-        mainModel.initialize(mainPresenter!!)
-        mainPresenter!!.initialize()
+        mainModel.initialize(mainPresenter)
+        mainPresenter.initialize()
 
     }
 
@@ -53,6 +53,6 @@ class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     override fun onDestroy() {
         super.onDestroy()
-        mainPresenter?.destroy()
+        mainPresenter.destroy()
     }
 }

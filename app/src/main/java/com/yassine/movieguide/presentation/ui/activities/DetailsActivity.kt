@@ -17,7 +17,7 @@ class DetailsActivity : YouTubeBaseActivity(), DetailsPresenter.View, YouTubePla
 
     var movie: Movie? = null
     private val RECOVERY_REQUEST = 1
-    private var detailsPresenter : DetailsPresenter? = null
+    private lateinit var detailsPresenter : DetailsPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -61,6 +61,6 @@ class DetailsActivity : YouTubeBaseActivity(), DetailsPresenter.View, YouTubePla
 
     override fun onDestroy() {
         super.onDestroy()
-        detailsPresenter?.destroy()
+        detailsPresenter.destroy()
     }
 }
